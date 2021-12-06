@@ -27,8 +27,8 @@ func TestDay6_SecondHalf(t *testing.T) {
 		inputFile string
 		want      int
 	}{
-		{"testdata/day_6_example", 5934},
-		// {"testdata/day_6_input", 383160},
+		{"testdata/day_6_example", 26984457539},
+		{"testdata/day_6_input", 1721148811504},
 	}
 	for _, tt := range tests {
 		t.Run(tt.inputFile, func(t *testing.T) {

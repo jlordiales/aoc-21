@@ -6,25 +6,29 @@ import (
 )
 
 func countFishAfter(input []string, days int) int {
-	var fish []int
+	fish := make(map[int]int)
 	for _, n := range strings.Split(input[0], ",") {
 		days, _ := strconv.Atoi(n)
-		fish = append(fish, days)
+		fish[days]++
 	}
 
 	for i := 0; i < days; i++ {
-		var newOnes []int
-		for j := 0; j < len(fish); j++ {
-			if fish[j] == 0 {
-				fish[j] = 6
-				newOnes = append(newOnes, 8)
-			} else {
-				fish[j]--
+		for j := 0; j <= 8; j++ {
+			if fish[j] > 0 {
+				fish[j-1] += fish[j]
+				fish[j] = 0
 			}
 		}
 
-		fish = append(fish, newOnes...)
+		fish[6] += fish[-1]
+		fish[8] += fish[-1]
+		fish[-1] = 0
 	}
 
-	return len(fish)
+	var total int
+	for _, v := range fish {
+		total += v
+	}
+
+	return total
 }
